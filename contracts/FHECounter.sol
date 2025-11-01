@@ -10,6 +10,7 @@ contract FHECounter is SepoliaConfig {
 
     event CounterIncremented(address indexed user);
     event CounterDecremented(address indexed user);
+    event CounterReset(address indexed user);
 
     /// @notice Returns the current count
     function getCount() external view returns (euint32) {
@@ -42,5 +43,15 @@ contract FHECounter is SepoliaConfig {
         FHE.allow(_count, msg.sender);
         
         emit CounterDecremented(msg.sender);
+    }
+
+    /// @notice Resets the counter to zero
+    function reset() external {
+        _count = FHE.asEuint32(0);
+        
+        FHE.allowThis(_count);
+        FHE.allow(_count, msg.sender);
+        
+        emit CounterReset(msg.sender);
     }
 }
