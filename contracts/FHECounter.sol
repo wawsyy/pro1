@@ -5,6 +5,8 @@ import {FHE, euint32, externalEuint32} from "@fhevm/solidity/lib/FHE.sol";
 import {SepoliaConfig} from "@fhevm/solidity/config/ZamaConfig.sol";
 
 /// @title A simple FHE counter contract
+/// @author fhevm-hardhat-template
+/// @notice A basic example contract showing how to work with encrypted data
 contract FHECounter is SepoliaConfig {
     euint32 private _count;
     address private _owner;
