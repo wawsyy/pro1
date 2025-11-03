@@ -23,6 +23,8 @@ describe("FHECounter", function () {
   let fheCounterContract: FHECounter;
   let fheCounterContractAddress: string;
 
+  // Test suite for encrypted counter operations
+
   before(async function () {
     const ethSigners: HardhatEthersSigner[] = await ethers.getSigners();
     signers = { deployer: ethSigners[0], alice: ethSigners[1], bob: ethSigners[2] };
