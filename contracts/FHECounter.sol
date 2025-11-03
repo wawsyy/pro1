@@ -10,18 +10,32 @@ import {SepoliaConfig} from "@fhevm/solidity/config/ZamaConfig.sol";
 contract FHECounter is SepoliaConfig {
     euint32 private _count;
     address private _owner;
+    bool private _paused;
 
     event CounterIncremented(address indexed user);
     event CounterDecremented(address indexed user);
     event CounterReset(address indexed user);
+    event Paused(address indexed account);
+    event Unpaused(address indexed account);
 
     modifier onlyOwner() {
         require(msg.sender == _owner, "FHECounter: caller is not the owner");
         _;
     }
 
+    modifier whenNotPaused() {
+        require(!_paused, "FHECounter: contract is paused");
+        _;
+    }
+
+    modifier whenPaused() {
+        require(_paused, "FHECounter: contract is not paused");
+        _;
+    }
+
     constructor() {
         _owner = msg.sender;
+        _paused = false;
     }
 
     /// @notice Returns the current count
@@ -70,5 +84,22 @@ contract FHECounter is SepoliaConfig {
     /// @notice Returns the owner address
     function owner() external view returns (address) {
         return _owner;
+    }
+
+    /// @notice Pauses the contract
+    function pause() external onlyOwner whenNotPaused {
+        _paused = true;
+        emit Paused(msg.sender);
+    }
+
+    /// @notice Unpauses the contract
+    function unpause() external onlyOwner whenPaused {
+        _paused = false;
+        emit Unpaused(msg.sender);
+    }
+
+    /// @notice Returns whether the contract is paused
+    function paused() external view returns (bool) {
+        return _paused;
     }
 }
