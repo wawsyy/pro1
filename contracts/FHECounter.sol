@@ -106,4 +106,25 @@ contract FHECounter is SepoliaConfig {
     function paused() external view returns (bool) {
         return _paused;
     }
+
+    /// @notice Batch increment operation
+    /// @param inputEuint32 the encrypted input value
+    /// @param inputProof the input proof
+    /// @param times number of times to increment
+    /// @dev Useful for multiple increments with the same value
+    function batchIncrement(externalEuint32 inputEuint32, bytes calldata inputProof, uint8 times) external whenNotPaused {
+        require(times > 0 && times <= 10, "FHECounter: times must be between 1 and 10");
+        euint32 encryptedEuint32 = FHE.fromExternal(inputEuint32, inputProof);
+        
+        euint32 result = _count;
+        for (uint8 i = 0; i < times; i++) {
+            result = FHE.add(result, encryptedEuint32);
+        }
+        _count = result;
+
+        FHE.allowThis(result);
+        FHE.allow(result, msg.sender);
+        
+        emit CounterIncremented(msg.sender);
+    }
 }
