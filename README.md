@@ -23,4 +23,20 @@ npm install
 npm run compile
 ```
 
+### Deploy Contracts
+
+```bash
+npm run deploy
+```
+
+### Run Tests
+
+```bash
+npm test
+```
+
+## Configuration
+
+The project uses Hardhat with FHEVM plugin for FHE operations. Configuration can be found in `hardhat.config.ts`.
+
 For more information about how to use this template, please refer to the [FHEVM doc](https://docs.zama.ai/fhevm)
