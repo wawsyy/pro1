@@ -79,11 +79,12 @@ contract FHECounter is SepoliaConfig {
     }
 
     /// @notice Resets the counter to zero
-    function reset() external onlyOwner {
-        _count = FHE.asEuint32(0);
+    function reset() external onlyOwner whenNotPaused {
+        euint32 newCount = FHE.asEuint32(0);
+        _count = newCount;
         
-        FHE.allowThis(_count);
-        FHE.allow(_count, msg.sender);
+        FHE.allowThis(newCount);
+        FHE.allow(newCount, msg.sender);
         
         emit CounterReset(msg.sender);
     }
