@@ -7,7 +7,10 @@ import {SepoliaConfig} from "@fhevm/solidity/config/ZamaConfig.sol";
 /// @title A simple FHE counter contract
 /// @author fhevm-hardhat-template
 /// @notice A basic example contract showing how to work with encrypted data
+/// @dev Version 1.0.0
 contract FHECounter is SepoliaConfig {
+    string public constant VERSION = "1.0.0";
+    
     euint32 private _count;
     address private _owner;
     bool private _paused;
