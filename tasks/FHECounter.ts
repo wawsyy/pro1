@@ -6,16 +6,14 @@ import type { TaskArguments } from "hardhat/types";
  * Tutorial: Deploy and Interact Locally (--network localhost)
  * ===========================================================
  *
- * 1. From a separate terminal window:
- *
+ * Step 1: Start a local hardhat node
+ *   From a separate terminal window:
  *   npx hardhat node
  *
- * 2. Deploy the FHECounter contract
- *
+ * Step 2: Deploy the FHECounter contract
  *   npx hardhat --network localhost deploy
  *
- * 3. Interact with the FHECounter contract
- *
+ * Step 3: Interact with the FHECounter contract
  *   npx hardhat --network localhost task:decrypt-count
  *   npx hardhat --network localhost task:increment --value 2
  *   npx hardhat --network localhost task:decrement --value 1
@@ -25,12 +23,10 @@ import type { TaskArguments } from "hardhat/types";
  * Tutorial: Deploy and Interact on Sepolia (--network sepolia)
  * ===========================================================
  *
- * 1. Deploy the FHECounter contract
- *
+ * Step 1: Deploy the FHECounter contract
  *   npx hardhat --network sepolia deploy
  *
- * 2. Interact with the FHECounter contract
- *
+ * Step 2: Interact with the FHECounter contract
  *   npx hardhat --network sepolia task:decrypt-count
  *   npx hardhat --network sepolia task:increment --value 2
  *   npx hardhat --network sepolia task:decrement --value 1
