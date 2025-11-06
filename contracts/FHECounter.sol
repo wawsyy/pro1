@@ -6,7 +6,8 @@ import {SepoliaConfig} from "@fhevm/solidity/config/ZamaConfig.sol";
 
 /// @title A simple FHE counter contract
 /// @author fhevm-hardhat-template
-/// @notice A basic example contract showing how to work with encrypted data
+/// @notice A very basic example contract showing how to work with encrypted data using FHEVM.
+/// @notice Supports increment, decrement, batch operations, ownership, and pausable features
 /// @dev Version 1.0.0
 contract FHECounter is SepoliaConfig {
     string public constant VERSION = "1.0.0";
@@ -45,6 +46,7 @@ contract FHECounter is SepoliaConfig {
     }
 
     /// @notice Returns the current count
+    /// @return The current encrypted count
     function getCount() external view returns (euint32) {
         return _count;
     }
