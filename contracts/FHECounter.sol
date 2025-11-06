@@ -18,6 +18,7 @@ contract FHECounter is SepoliaConfig {
     event CounterIncremented(address indexed user);
     event CounterDecremented(address indexed user);
     event CounterReset(address indexed user);
+    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
     event Paused(address indexed account);
     event Unpaused(address indexed account);
 
@@ -36,9 +37,11 @@ contract FHECounter is SepoliaConfig {
         _;
     }
 
+    /// @notice Initializes the contract with the deployer as owner
     constructor() {
         _owner = msg.sender;
         _paused = false;
+        emit OwnershipTransferred(address(0), msg.sender);
     }
 
     /// @notice Returns the current count
@@ -92,6 +95,15 @@ contract FHECounter is SepoliaConfig {
     /// @notice Returns the owner address
     function owner() external view returns (address) {
         return _owner;
+    }
+
+    /// @notice Transfers ownership to a new address
+    /// @param newOwner the new owner address
+    function transferOwnership(address newOwner) external onlyOwner {
+        require(newOwner != address(0), "FHECounter: new owner is the zero address");
+        address oldOwner = _owner;
+        _owner = newOwner;
+        emit OwnershipTransferred(oldOwner, newOwner);
     }
 
     /// @notice Pauses the contract
