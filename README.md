@@ -4,10 +4,11 @@ A FHEVM Hardhat-based template for developing Solidity smart contracts.
 
 ## Features
 
-- Fully Homomorphic Encryption (FHE) support
-- Counter contract with encrypted state
-- Hardhat development environment
-- Ownership and access control
+- **Fully Homomorphic Encryption (FHE)**: Secure operations on encrypted data
+- **Counter Contract**: Encrypted state management with increment/decrement
+- **Hardhat Development**: Full development environment with testing and deployment
+- **Access Control**: Ownership and pausable functionality
+- **Batch Operations**: Efficient batch increment operations
 
 ## Usage
 
