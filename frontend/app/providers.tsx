@@ -45,7 +45,6 @@ export function Providers({ children }: Props) {
     <QueryClientProvider client={queryClient}>
       <WagmiProvider config={wagmiConfig}>
         <RainbowKitProvider
-          chains={chains}
           modalSize="compact"
           theme={darkTheme({
             accentColor: "#5C4EE5",
