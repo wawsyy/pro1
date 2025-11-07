@@ -310,11 +310,14 @@ export function useEncryptedPredictionPoll(): UseEncryptedPredictionPollState {
     setIsDecrypting(true);
     setMessage("Generating FHE decryption signature...");
 
+    // Store address in a const to help TypeScript type narrowing
+    const contractAddress = contractInfo.address;
+
     try {
       const signature = await loadSignature(
         instance,
         storage,
-        contractInfo.address,
+        contractAddress,
         ethersSigner,
       );
 
@@ -326,7 +329,7 @@ export function useEncryptedPredictionPoll(): UseEncryptedPredictionPollState {
       const result = await instance.userDecrypt(
         handles.map((h) => ({
           handle: h.handle,
-          contractAddress: contractInfo.address,
+          contractAddress: contractAddress,
         })),
         signature.privateKey,
         signature.publicKey,
