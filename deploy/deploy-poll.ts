@@ -28,9 +28,8 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     "Innovations in renewable energy"
   ];
 
-  // Set voting period: starts now, ends in 7 days
-  const startTime = Math.floor(Date.now() / 1000);
-  const endTime = startTime + (7 * 24 * 60 * 60); // 7 days
+  // Set voting duration: 7 days
+  const votingDurationSeconds = 7 * 24 * 60 * 60; // 7 days in seconds
 
   const deployedPoll = await deploy("EncryptedPredictionPoll", {
     from: deployer,
@@ -40,8 +39,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
       pollDescription,
       optionLabels,
       optionDescriptions,
-      startTime,
-      endTime
+      votingDurationSeconds
     ],
     log: true,
     waitConfirmations: 1,
@@ -49,9 +47,9 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
   console.log(`\n✅ EncryptedPredictionPoll deployed at: ${deployedPoll.address}`);
   console.log(`📊 Poll: "${pollHeadline}"`);
-  console.log(`⏰ Voting period: ${new Date(startTime * 1000).toISOString()} to ${new Date(endTime * 1000).toISOString()}`);
+  console.log(`⏰ Voting duration: ${votingDurationSeconds / 86400} days`);
   console.log(`📝 Options: ${optionLabels.length}`);
-  console.log(`\n🔗 Add this to your frontend:\nContract Address: ${deployedPoll.address}`);
+  console.log(`\n🔗 Contract Address: ${deployedPoll.address}`);
 };
 
 export default func;
